@@ -8,9 +8,14 @@ export default function App() {
     {src:"images/pic5.jpg",alt:"Large moth on a leaf"}
   ];
   const [displayedImage,setDisplayedImage]=useState(images[0]);
+  const [isDarkened, setIsDarkened] = useState(false);
 
   const handleThumbnailClick =(image)=>{
     setDisplayedImage(image);
+  };
+
+  const toggleDarken = () => {
+    setIsDarkened(!isDarkened);
   };
   return (
     <>
@@ -21,8 +26,15 @@ export default function App() {
           src={displayedImage.src}
           alt={displayedImage.alt}
         />
-        <div className="overlay"></div>
-        <button className="dark">Darken</button>
+        <div 
+        className="overlay"
+        style={{
+          backgroundColor: isDarkened ? 'rgba(0, 0, 0, 0.5)' : 'transparent'
+        }}
+        ></div>
+        <button className="dark"　onClick={toggleDarken}>
+        {isDarkened ? 'Lighten' : 'Darken'}
+        </button>
       </div>
       <div className="thumb-bar">
         {images.map((image,index)=>(
